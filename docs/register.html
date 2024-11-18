@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="./favicon.png" />
+		<meta name="viewport" content="width=device-width" />
+		
+		<link href="./_app/immutable/assets/0.BlvOkdTb.css" rel="stylesheet">
+		<link href="./_app/immutable/assets/5.D7nSHbyc.css" rel="stylesheet">
+		<link rel="modulepreload" href="./_app/immutable/entry/start.DIWbK3uW.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/entry.oGAgg9QN.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/scheduler.NrZV1iTz.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.DfnQekQk.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/paths.BeZTaSSv.js">
+		<link rel="modulepreload" href="./_app/immutable/entry/app.f1gZp_UJ.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/index.BNALcpTY.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/0.BZ8CR42O.js">
+		<link rel="modulepreload" href="./_app/immutable/nodes/5.DQ2vW5Ao.js">
+		<link rel="modulepreload" href="./_app/immutable/chunks/user.CIJRMkxj.js">
+	</head>
+	<body data-sveltekit-preload-data="hover" data-theme="skeleton">
+		<div style="display: contents">  <nav data-svelte-h="svelte-1qd6ssp"><a href="./">Home</a> <a href="./photoapp">Photos</a> <a href="./register">Register</a> <a href="./login">Login</a></nav> <main class="svelte-c2pl7w"><h1 data-svelte-h="svelte-issj3d">Register</h1> <div class="container svelte-c2pl7w"><form><div style="width: 100px; height: 100px; border-radius: 50%; overflow: hidden; background-color: black;"></div> <label for="name" style="color: white;" data-svelte-h="svelte-b1h0v6">Namn:</label> <input type="text" id="name" style="color: black;" value=""> <label for="mail" style="color: white;" data-svelte-h="svelte-6oby8f">Mail:</label> <input type="email" id="mail" style="color: black;" value=""> <label for="pass" style="color: white;" data-svelte-h="svelte-1i1nikh">Lösenord:</label> <input type="password" id="pass" style="color: black;" value=""> <label for="age" style="color: white;" data-svelte-h="svelte-1k96ww8">Födelsedatum:</label> <input type="date" id="age" style="color: black;" value=""> <label for="Favoritfärg" style="color: white;" data-svelte-h="svelte-o1j9qu">Färg:</label> <select id="Favoritfärg" style="color: black;"><option value="blue">Blå</option><option value="red">Röd</option><option value="black">Svart</option></select> <input type="submit" value="Registrera" style="margin-top: 10px;"></form> <p style="color: white;" data-svelte-h="svelte-907yso">Har du redan ett konto? <a href="/login" style="color: lightblue;">Logga in</a>.</p></div> </main> 
+			
+			<script>
+				{
+					__sveltekit_1s6nk8s = {
+						base: new URL(".", location).pathname.slice(0, -1)
+					};
+
+					const element = document.currentScript.parentElement;
+
+					const data = [null,null];
+
+					Promise.all([
+						import("./_app/immutable/entry/start.DIWbK3uW.js"),
+						import("./_app/immutable/entry/app.f1gZp_UJ.js")
+					]).then(([kit, app]) => {
+						kit.start(app, element, {
+							node_ids: [0, 5],
+							data,
+							form: null,
+							error: null
+						});
+					});
+				}
+			</script>
+		</div>
+	</body>
+</html>
