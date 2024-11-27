@@ -34,7 +34,7 @@
 
 <nav data-sveltekit-reload>
 	{#each pages as page}
-		<a  class:current={currentPage.includes(page)} href={`/${page=="home" ?"":page}`}>{page.charAt(0).toUpperCase()+page.slice(1)}</a>
+		<a  class:current={currentPage.includes(page)} href={`{base}/${page=="home" ?"":page}`}>{page.charAt(0).toUpperCase()+page.slice(1)}</a>
 		
 	{/each}
 </nav>
