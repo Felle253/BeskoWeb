@@ -169,7 +169,7 @@
   .categories_container section ul {
     list-style-type: none;
     padding: 0;
-  } /*skibidi gyat */
+  }
 
   .categories_container section ul li {
     margin: 15px 0;

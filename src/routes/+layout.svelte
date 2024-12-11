@@ -21,7 +21,7 @@
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
-	let pages = ["home","photoapp","register","login","shoppinglist"]
+	let pages = ["home","photoapp","register","login","shoppinglist","memory"]
 	import { browser } from "$app/environment";
 	import { writable } from "svelte/store";
 
