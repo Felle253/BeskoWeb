@@ -55,8 +55,9 @@
         card1.matched = true;
         card2.matched = true;
         cards = cards
+        flipCount = 0
         
-      } else {  
+      } 
         setTimeout(() => {
           cards.forEach((card) => {
             card.flipped = card.matched;
@@ -71,8 +72,7 @@
       checkGameOver();
 
     }
-  } 
-
+  
   function checkGameOver() {
         const allMatched = cards.every(card => card.matched);
         if (allMatched) {
