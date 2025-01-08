@@ -21,12 +21,11 @@
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
 
-	let pages = ["home","photoapp","register","login","shoppinglist","memory"]
+	let pages = ["home","photoapp","register","login","shoppinglist","memory","chat","search"]
 	import { browser } from "$app/environment";
 	import { writable } from "svelte/store";
 
 	let currentPage = browser ? window.document.location.href : ""
-
 
 	console.log("sida:",currentPage)
 </script>
@@ -46,7 +45,6 @@
   padding: 0;
   height: 99vh;
   width: 99vw;
-  background: linear-gradient(to bottom, #ffffff, #cce7ff);
   font-family: 'bertsfamilj', sans-serif;
 
   
@@ -69,7 +67,7 @@ nav {
   background-color: rgba(0, 0, 50, 0.447);
   border-bottom: 3px solid #ff4d4d;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(5px);
+  /*backdrop-filter: blur(5px);*/
 }
 
 a {
