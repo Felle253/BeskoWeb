@@ -2,19 +2,36 @@
     import { goto } from '$app/navigation';
     
     let search
+    import { pokemons_store } from "$lib/pokemons"
+    let pokemons = []
+    import { onMount } from "svelte";
+    onMount(()=>{  
+        console.log($pokemons_store)
+        if ($pokemons_store.length>2)
+            pokemons = JSON.parse($pokemons_store)
+})
+
+      function openPokemonPage(pokemonName) {
+        goto(`/search/${pokemonName}`); // Navigate to the page for the clicked Pokémon
+      }
 </script>
 
-<form on:submit|preventDefault={() => goto('/search/' + search)}>
-    <input type="text" placeholder="Sök upp en pokemon" bind:value={search} class="search-input"/>
-  </form>
-    
+
 <main>
   <slot></slot>
 </main>
-    
+<div class="recent-views">
+  <div class="recent-pokemon">
+        {#each pokemons as p}
+        <a href="/search/{p.name}">
+          <img src="{Object.entries(p.sprites)[0][1]}" alt=" sprite" class="pokemon-image" /></a>
+      {/each}    
+      </div>
+  </div>
 <div class="backdrop"></div>
 
 <style>
+
   .backdrop {
     position: fixed;
     top: 0;
@@ -27,62 +44,49 @@
     filter: blur(5px);
   }
 
-  .search-input {
-    width: 60%;
-    padding: 20px;
-    font-size: 18px;
-    border: 3px solid #ff007f;
-    border-radius: 50px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: white;
-    outline: none;
+  main{
     position: relative;
-    overflow: hidden;
-    transition: all 0.4s ease-in-out;
-    box-shadow: 0 0 15px rgba(255, 0, 127, 0.7);
+    top:150px;
   }
+  .recent-views {
+        display: flex;
+        justify-content: center;
+        gap: 1em;
+        margin-left: auto;
+        margin-right: auto;
+        flex-direction: row;
+        display: flex;
+        max-width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 125px;
+        border-radius: 20px;
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+        transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+        object-fit: cover;
+        clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+        background-color: #5858581b;
+        
+    }
 
-  .search-input::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255, 0, 127, 0.3), rgba(0, 0, 0, 0.7));
-    animation: pulse 3s infinite ease-in-out;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    z-index: -1;
-  }
+    .recent-pokemon {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+    }
 
-  .search-input:focus {
-    border-color: #ff7f50;
-    box-shadow: 0 0 30px 5px rgba(255, 127, 80, 0.8);
-    transform: scale(1.05);
-    background-color: rgba(255, 255, 255, 0.1);
-  }
+    .pokemon-image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease;
+    }
 
-  .search-input::placeholder {
-    color: #fff;
-    font-style: italic;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-  }
+    .pokemon-image:hover {
+        transform: scale(1.1);
+    }
 
-  .search-input:focus::placeholder {
-    color: #ff7f50;
-    text-shadow: 0 0 12px rgba(255, 127, 80, 0.7);
-  }
-
-  .search-input:hover {
-    transform: scale(1.03);
-    background-color: rgba(255, 255, 255, 0.15);
-  }
-
-  form {
-    margin-top: 150px;
-    margin-bottom: 5px;
-    display: flex;
-    justify-content: center;
-  }
 </style>

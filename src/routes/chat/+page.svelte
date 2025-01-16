@@ -2,7 +2,7 @@
     import { enhance } from '$app/forms';
     import ElizaBot from 'elizabot'; 
     import { chat_store } from "$lib/chat";
-
+    import { onMount } from 'svelte';
 
     const eliza = new ElizaBot();
     let chat = [{ user: 'Nigmon German', message: eliza.getInitial() }];

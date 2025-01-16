@@ -1,7 +1,34 @@
 <script>
     /** @type {import('./$types').PageData} */
+    import { goto } from '$app/navigation';
     export let data;
+    import { pokemons_store } from "$lib/pokemons"
+    let pokemons = []
+    let evolutionImages = []
+    import { onMount } from "svelte";
+
+    onMount(()=>{  
+        console.log($pokemons_store)
+        if ($pokemons_store.length>2)
+            pokemons = JSON.parse($pokemons_store)
+        if (pokemons.length>=5){
+            pokemons.splice(0,1)
+        }  
+        pokemons = [...pokemons, data.response]
+
+        $pokemons_store = JSON.stringify(pokemons)
+
+                    
+        console.log("store",pokemons)
+
+        
+
+})
+
+
 </script>
+<button on:click={() => goto('/search')}>Back to Search</button>
+
 <div class="container">
     {#await data}
         <p class="loading">Loading Pokemon...</p>
@@ -52,8 +79,14 @@
                 </div>
             </div>
         </div>
+
+      
+
+
     {/await}
 </div>
+
+
 
 <style>
     .container {
@@ -86,22 +119,29 @@
         transform: perspective(800px) rotateY(2deg);
     }
 
-    .pokemon-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    transform: scaleX(0);
-    transform-origin: bottom left;
-    transition: transform 0.6s ease-out;
-    z-index: 0;
-}
+    button{
+        display: flex;
+        max-width: fit-content;
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-.pokemon-card:hover::before {
-    transform: scaleX(1);
-}
+    .pokemon-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        transform: scaleX(0);
+        transform-origin: bottom left;
+        transition: transform 0.6s ease-out;
+        z-index: 0;
+    }
+
+    .pokemon-card:hover::before {
+        transform: scaleX(1);
+    }
 
     .pokemon-images {
         flex: 1;
