@@ -1,30 +1,86 @@
 <script>
+	import { browser } from '$app/environment';
     /** @type {import('./$types').PageData} */
     import { goto } from '$app/navigation';
-    export let data;
     import { pokemons_store } from "$lib/pokemons"
-    let pokemons = []
-    let evolutionImages = []
+    import { Chart } from 'chart.js/auto';
     import { onMount } from "svelte";
 
-    onMount(()=>{  
-        console.log($pokemons_store)
+    export let data;
+    let pokemons = []
+    let pokemonStats = [];
+
+
+    if(browser)
+        save()
+    onMount(()=>{  save()})
+
+    function save(){
+        //console.log($pokemons_store)
         if ($pokemons_store.length>2)
             pokemons = JSON.parse($pokemons_store)
-        if (pokemons.length>=5){
-            pokemons.splice(0,1)
-        }  
-        pokemons = [...pokemons, data.response]
+
+        // Check if the current Pokémon already exists in the list
+        const currentPokemonName = data.response.name.toLowerCase();
+        const exists = pokemons.some(pokemon => pokemon.name.toLowerCase() === currentPokemonName);
+
+        if (!exists) {
+            if (pokemons.length>=5){
+                pokemons.splice(0,1)
+            }  
+            pokemons = [...pokemons, data.response]
+            console.log("store",pokemons)
+        }
 
         $pokemons_store = JSON.stringify(pokemons)
+        pokemons = pokemons
+    }
 
-                    
-        console.log("store",pokemons)
+    onMount(() => {
+       // Extract stats (you may want to map this dynamically based on the available stats)
+       pokemonStats = data.response.stats.map(stat => stat.base_stat);
 
-        
+       // Data for the radar chart
+       const radarData = {
+           labels: ['HP', 'Attack', 'Defense', 'Speed', 'Special Attack', 'Special Defense'],
+           datasets: [{
+               label: data.response.name,
+               data: pokemonStats,
+               backgroundColor: 'rgba(255, 0, 127, 0.2)',
+               borderColor: '#ff007f',
+               borderWidth: 1
+           }]
+       };
 
-})
+       // Radar chart configuration
+       const config = {
+    type: 'radar',
+    data: radarData,
+    options: {
+        elements: {
+            line: {
+                borderWidth: 2
+            }
+        },
+        scales: {
+            r: {
+                angleLines: {
+                    display: true // You can still keep angle lines visible
+                },
+                ticks: {
+                    display: false // This hides the ticks/numbers
+                },
+                suggestedMin: 0,
+                suggestedMax: 200
+            }
+        }
+    }
+};
 
+
+       // Initialize the chart
+       new Chart(document.getElementById('radar-chart'), config);
+   });
 
 </script>
 <button on:click={() => goto('/search')}>Back to Search</button>
@@ -47,11 +103,11 @@
                 <h2 class="info-title">Pokémon Information</h2>
                 <div class="info-item">
                     <h3>Weight</h3>
-                    <p>{pokemon.response.weight} kg</p>
+                    <p>{pokemon.response.weight} hg</p>
                 </div>
                 <div class="info-item">
                     <h3>Height</h3>
-                    <p>{pokemon.response.height} m</p>
+                    <p>{pokemon.response.height} dm</p>
                 </div>
                 <div class="info-item">
                     <h3>Type(s)</h3>
@@ -62,31 +118,25 @@
                     </ul>
                 </div>
                 <div class="info-item">
-                    <h3>Abilities</h3>
-                    <ul>
-                        {#each pokemon.response.abilities as ability}
-                            <li>{ability.ability.name}</li>
+                    <h3>Base Stats</h3>
+                    <div class="stat-bars">
+                        {#each pokemon.response.stats as stat}
+                            <div class="stat-bar-container">
+                                <span class="stat-name">{stat.stat.name}</span>
+                                <div class="stat-bar" style="width: {stat.base_stat}%"></div>
+                                <span class="stat-value">{stat.base_stat}</span>
+                            </div>
                         {/each}
-                    </ul>
+                    </div>
                 </div>
                 <div class="info-item">
-                    <h3>Base Stats</h3>
-                    <ul>
-                        {#each pokemon.response.stats as stat}
-                            <li>{stat.stat.name}: {stat.base_stat}</li>
-                        {/each}
-                    </ul>
+                    <h3>Base Stats (Radar Chart)</h3>
+                    <canvas id="radar-chart" width="400" height="400"></canvas>
                 </div>
             </div>
         </div>
-
-      
-
-
     {/await}
 </div>
-
-
 
 <style>
     .container {
@@ -109,7 +159,7 @@
         gap: 40px;
         transition: all 0.5s ease-out;
         /*rotarad bakgrund*/
-        transform: perspective(800px) rotateY(7deg);
+        transform: perspective(800px) rotateY(10deg);
         position: relative;
         overflow: hidden;
     }
@@ -184,7 +234,7 @@
         padding: 25px;
         border-radius: 20px;
         box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
-        max-height: 600px;
+        max-height: 1200px;
         overflow-y: auto;
         background: rgba(104, 101, 101, 0.2);
         backdrop-filter: blur(10px);
@@ -278,4 +328,88 @@
             font-size: 1rem;
         }
     }
+
+    .error {
+    background-color: rgba(255, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+.suggestions {
+    margin-top: 10px;
+}
+
+.suggestions a {
+    color: #ff7f50;
+    text-decoration: none;
+    margin: 5px;
+    display: inline-block;
+}
+
+.suggestions a:hover {
+    text-decoration: underline;
+}
+
+.stat-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.stat-bar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.stat-name {
+    width: 80px;
+    font-size: 1.1rem;
+    color: #ff6b81;
+}
+
+.stat-bar {
+    height: 20px;
+    border-radius: 5px;
+    background-color: #ff6b81;
+    transition: width 0.3s ease;
+    flex-grow: 1;
+    margin: 0 10px;
+}
+
+.stat-value {
+    font-size: 1.1rem;
+    color: #ccc;
+}
+
+.evolution-chain {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
+
+.evolution {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.evolution img {
+    width: 80px;
+    height: 80px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.evolves-to {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+
 </style>

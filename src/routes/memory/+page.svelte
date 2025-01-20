@@ -224,12 +224,26 @@ main {
     grid-template-rows: repeat(2, 100px);
   }
 }
-
+.backdrop{
+  background-image: url(https://www.washingtonpost.com/resizer/zh9LHAEW9VfZ3MPdEFLyWmMteD8=/arc-anglerfish-washpost-prod-washpost/public/FSOIG5G5V25I63XSNKEHTOQR4E.jpg);
+  background-size:cover;
+  z-index:1;
+  top:0;
+  left:0;
+  width:100vw;
+  height:100vh;
+  padding-top: 10px;
+}
 .game-over-message.show {
     display: block;
 }
 
+.h1 {
+  font-size: large;
+}
+
   </style>
+  <div class="backdrop">
   
   <h1>Memory</h1>
   
@@ -258,5 +272,7 @@ main {
     {#if gameOver}
         <p>{winner} wins!</p>
     {/if}
+</div>
 
 </aside>
+</div>
