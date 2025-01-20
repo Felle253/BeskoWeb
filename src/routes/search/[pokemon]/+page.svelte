@@ -119,18 +119,6 @@
                 </div>
                 <div class="info-item">
                     <h3>Base Stats</h3>
-                    <div class="stat-bars">
-                        {#each pokemon.response.stats as stat}
-                            <div class="stat-bar-container">
-                                <span class="stat-name">{stat.stat.name}</span>
-                                <div class="stat-bar" style="width: {stat.base_stat}%"></div>
-                                <span class="stat-value">{stat.base_stat}</span>
-                            </div>
-                        {/each}
-                    </div>
-                </div>
-                <div class="info-item">
-                    <h3>Base Stats (Radar Chart)</h3>
                     <canvas id="radar-chart" width="400" height="400"></canvas>
                 </div>
             </div>
