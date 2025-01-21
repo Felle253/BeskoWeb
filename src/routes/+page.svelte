@@ -7,7 +7,7 @@
 		<div class="text-section">
 		  <h2>Nigmon German har blivit förbannad.</h2>
 		  <h2>11/05/24</h2>
-		  <p>När han kom hem från jobbet igår kväll såg han en person käka på hans hund. Nu vill han döda alla såna personer.</p>
+		  <p>När han kom hem från jobbet igår kväll såg han en person käka på hans hund. Nu vill han döda alla såna personer. OH NO</p>
 		</div>
 	  </div>
 	<footer class="footer">
