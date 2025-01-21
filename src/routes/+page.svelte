@@ -25,7 +25,6 @@
 	  background-size: cover;
 	   overflow-x: hidden;
 		width: 100vw;
-
 	}
   
 	.h1 {

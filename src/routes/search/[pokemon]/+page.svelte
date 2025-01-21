@@ -37,7 +37,7 @@
     }
 
     onMount(() => {
-       // Extract stats (you may want to map this dynamically based on the available stats)
+       // Extract stats
        pokemonStats = data.response.stats.map(stat => stat.base_stat);
 
        // Data for the radar chart
@@ -52,7 +52,7 @@
            }]
        };
 
-       // Radar chart configuration
+       // Radar chart
        const config = {
     type: 'radar',
     data: radarData,
@@ -65,10 +65,10 @@
         scales: {
             r: {
                 angleLines: {
-                    display: true // You can still keep angle lines visible
+                    display: true
                 },
                 ticks: {
-                    display: false // This hides the ticks/numbers
+                    display: false
                 },
                 suggestedMin: 0,
                 suggestedMax: 200
