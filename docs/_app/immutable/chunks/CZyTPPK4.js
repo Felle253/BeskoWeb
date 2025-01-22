@@ -1,0 +1,1 @@
+import{w as s}from"./Bts_OAxi.js";const e=JSON.parse((window==null?void 0:window.sessionStorage.getItem("pokemons"))||"[]"),t=s(e);t.subscribe(o=>{window==null||window.sessionStorage.setItem("pokemons",JSON.stringify(o))});export{t as p};
