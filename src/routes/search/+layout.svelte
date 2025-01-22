@@ -1,7 +1,8 @@
 <script>
     import { goto } from '$app/navigation';
     import { onMount } from "svelte";
-    import { pokemons_store } from "$lib/pokemons"
+    import { pokemons_store } from "$lib/pokemons";
+    import { base } from "$app/navigation";
 
     let search
     let pokemons = []
@@ -9,7 +10,7 @@
 
 
       function openPokemonPage(pokemonName) {
-        goto(`/search/${pokemonName}`); // Navigate to the page for the clicked Pokémon
+        goto(base+`/search/` + ${pokemonName}); // Navigate to the page for the clicked Pokémon
       }
 
       function clearRecentPokemons() {
@@ -128,6 +129,3 @@
     }
 
 </style>
-
-
-when sessionstorage is empty the website doesnt load, crashes fully
