@@ -63,7 +63,7 @@
     // Fetch the entire Pokedex (or a specific page) and update the list of Pokémon
     async function fetchPokedex(page = 1) {
         try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=20&offset=${(page - 1) * 20}`);
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=27&offset=${(page - 1) * 27}`);
             const data = await response.json();
             pokedex = await Promise.all(
                 data.results.map(async (pokemon) => {
@@ -122,18 +122,7 @@
                 {/each}
             </ul>
         {/if}
-        {#if similarPokemons.length > 0}
-            <div class="suggestions-wrapper">
-                <h3>Did you mean?</h3>
-                <ul>
-                    {#each similarPokemons as suggestion}
-                        <li on:click={() => handleSelect(suggestion)} class="suggestion-item">
-                            {suggestion.name}
-                        </li>
-                    {/each}
-                </ul>
-            </div>
-        {/if}
+        
     </form>
     <button on:click={fetchRandomPokemon} class="random-button">Random Pokémon</button>
 </div>

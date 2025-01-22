@@ -49,8 +49,10 @@
       if (card1.image === card2.image) {
         if (blueTurn) {
           bluePoints++;
+          blueTurn = true;
         } else {
           redPoints++;
+          blueTurn = false;
         }
         card1.matched = true;
         card2.matched = true;

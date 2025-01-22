@@ -4,19 +4,9 @@
     import { pokemons_store } from "$lib/pokemons"
 
     let search
-    
     let pokemons = []
+    $: pokemons = $pokemons_store.length > 2 ? JSON.parse($pokemons_store) : ""
 
-
-    $: pokemons = JSON.parse($pokemons_store)
-
-    
-
-    onMount(()=>{  
-        console.log($pokemons_store)
-        if ($pokemons_store.length>2)
-            pokemons = JSON.parse($pokemons_store)
-})
 
       function openPokemonPage(pokemonName) {
         goto(`/search/${pokemonName}`); // Navigate to the page for the clicked Pokémon
@@ -138,3 +128,6 @@
     }
 
 </style>
+
+
+when sessionstorage is empty the website doesnt load, crashes fully
