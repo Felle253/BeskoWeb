@@ -10,7 +10,7 @@
 
 
       function openPokemonPage(pokemonName) {
-        goto({base+}`/search/ + ${pokemonName}`); // Navigate to the page for the clicked Pokémon
+        goto(base+`/search/ + ${pokemonName}`); // Navigate to the page for the clicked Pokémon
       }
 
       function clearRecentPokemons() {
