@@ -1,6 +1,7 @@
 <script>
     import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
+    
     let search;
     let suggestions = [];
     let isDropdownVisible = false;
