@@ -83,7 +83,7 @@
    });
 
 </script>
-<button on:click={() => goto('/search')}>Back to Search</button>
+<button on:click={() => goto(base+ '/search')}>Back to Search</button>
 
 <div class="container">
     {#await data}

@@ -1,7 +1,7 @@
 <script>
     import { goto } from '$app/navigation';
 	import { base } from '$app/paths';
-    
+
     let search;
     let suggestions = [];
     let isDropdownVisible = false;
@@ -54,12 +54,12 @@
     function handleSelect(suggestion) {
         search = suggestion.name;
         isDropdownVisible = false;
-        goto(`/search/${suggestion.name}`);
+        goto(base+ `/search/${suggestion.name}`);
     }
 
     function fetchRandomPokemon() {
         const randomIndex = Math.floor(Math.random() * 1000) + 1;
-        goto(`/search/${randomIndex}`);
+        goto(base+ `/search/${randomIndex}`);
     }
 
     // Fetch the entire Pokedex (or a specific page) and update the list of Pokémon
@@ -86,7 +86,7 @@
 
     // View details for a specific Pokémon
     function viewPokemonDetails(pokemon) {
-        goto(`/search/${pokemon.name}`);
+        goto(base+ `/search/${pokemon.name}`);
     }
 
     // Navigate to the next or previous page in the Pokedex
