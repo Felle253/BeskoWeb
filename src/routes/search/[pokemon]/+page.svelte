@@ -5,6 +5,8 @@
     import { pokemons_store } from "$lib/pokemons"
     import { Chart } from 'chart.js/auto';
     import { onMount } from "svelte";
+    import { base } from '$app/paths';
+
 
     export let data;
     let pokemons = []
