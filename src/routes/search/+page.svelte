@@ -1,5 +1,6 @@
 <script>
     import { goto } from '$app/navigation';
+    import { base } from "$app/navigation";
     let search;
     let suggestions = [];
     let isDropdownVisible = false;
@@ -100,7 +101,7 @@
 
 <div class="container">
     <h1>Pokémon Search</h1>
-    <form on:submit|preventDefault={() => goto('/search/' + search)} class="search-form">
+    <form on:submit|preventDefault={() => goto(base+ '/search/' + search)} class="search-form">
         <input
             type="text"
             placeholder="Search Pokémon"
