@@ -2,7 +2,7 @@
     import { goto } from '$app/navigation';
     import { onMount } from "svelte";
     import { pokemons_store } from "$lib/pokemons";
-    import { base } from "$app/navigation";
+    import { base } from '$app/paths';
 
     let search
     let pokemons = []
