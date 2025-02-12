@@ -12,7 +12,7 @@
   
       setTimeout(() => {
         letters[randomIndex] = "";
-      }, 100000); //1000 = 1s
+      }, 5000); //1000 = 1s
     }
   
     function initializeGrid() {
