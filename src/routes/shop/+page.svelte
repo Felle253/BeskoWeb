@@ -93,21 +93,20 @@
 
     .gallery {
         display: grid;
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
         gap: 20px;
         padding: 40px;
+
     }
 
-    .card { 
-        position: relative;
-        background: rgba(255, 255, 255, 0);
+    .card {
+        background: rgba(255, 255, 255, 0.8);
         padding: 10px;
         border-radius: 10px;
         text-align: center;
         border: 10px solid #bc971d00;
-        scale: 90%;
+        transform: scale(1);
     }
-
     .image-container {
         position: relative;
         display: inline-block;
@@ -160,9 +159,10 @@
         color: white;
         padding: 20px;
         border-radius: 10px;
-        width: 300px;
+        width: 90%;
         text-align: center;
         box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+        max-width: 400px;
     }
 
     .popup img {
@@ -277,6 +277,44 @@
         background: darkgoldenrod;
         scale: 85%;
     }
+
+    @media (max-width: 768px) {
+        .header {
+            font-size: 28px;
+            padding: 10px;
+        }
+
+        .cart {
+            width: 35px;
+            height: 35px;
+        }
+
+        .gallery {
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        }
+
+        .popup {
+            width: 85%;
+        }
+
+        .cart-container {
+            width: 250px;
+        }
+
+        .purchase-btn {
+            font-size: 14px;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .header {
+            font-size: 24px;
+        }
+
+        .purchase-btn {
+            font-size: 16px;
+        }
+    }
 </style>
 
 <main style="background-image: url({backgroundImage});">
@@ -286,6 +324,7 @@
              alt="Cart" 
              class="cart" 
              on:click={toggleCart}>
+        <span class="cart-count">{shoppingList.length}</span>
     </div>
 
     <div class="gallery">
